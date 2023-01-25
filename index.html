@@ -1,203 +1,30 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
-<style>
-    body {
-        margin; 0;
-        padding: 0;
-        box-sizing: border-box;
-        background: #001E3C;
-    }
-    
-    .container {
-        width: 80%;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .box-kuiz {
-       margin-top: 4rem;
-        height: 250px;
-        width: 95%;
-        border: 1px solid white;
-        border-radius: 8px;
-        background: RGBA(255, 255, 255, 0.16);
-    }
-    
-    .button-box {
-        display: flex;
-        gap: 1.2em;
-        justify-content: center;
-        align-items: center;
-        padding: 5px;
-    }
-    
-    button {
-        background: #2C7A7B;
-        border: none;
-        padding: 12px 15px;
-        border-radius: 4px;
-        color: white;
-        font-family: Arial;
-    }
-    
-    .button:hover {
-        background: lightblue;
-    }
-    
-    .jawaban {
-        color: white;
-        text-align: center;
-        font-family: Arial;
-        font-size: 24px;
-        padding: 10px;
-    }
-    
-    .coin {
-        display: flex;
-        flex-direction: row;
-        color: white;
-        font-family: Arial;
-        gap: 8em;
-        position: absolute;
-        top: 2rem;
-    }
-</style>
 <body>
-  <div class="container">
-      <div class="coin">
-          <p class="nyawa"></p>
-          <p class="coin-p">2000</p>
-      </div>
-      <div class="box-kuiz">
-          
-      </div>
-      <div class="button-box">
-          <button onclick="functionTrue()" type="submit" class="button1">TRUE</button>
-          <button onclick="functionFalse()" class="button2" type="submit">FALSE</button>
-          <button onclick="acak()" type="submit" class="button3">
-              ACAK
-          </button>
-      </div>
-  </div>
-  <script>
-      const layout = document.querySelector(".box-kuiz");
+    <script type="text/javascript" charset="utf-8">
+        let data = [];
       
-      const layoutNyawa = document.querySelector(".nyawa")
-      
-      var nyawa = 3;
-      var coin = 2000;
-      
-      const tampil = () => {
-          layoutNyawa.innerHTML = `Kesempatan: ${nyawa}`;
-          document.querySelector(".coin-p").innerHTML = `Coin :  ${coin}`;
-      }
-      
-      const soal = [
-          {
-              id: 1,
-              pertanyaan: "Bener atau tidak bumi itu bulat?",
-              jawaban: true,
-              detik: 10,
-          },
-          {
-              id: 2,
-              pertanyaan: "Bener atau tidak Febri baik?",
-              jawaban: true,
-              detik: 10
-          },
-          {
-              id: 3,
-              pertanyaan: "Benarkah sebuah benda besar yang jatuh ke bumi dinamakan meteor?",
-              jawaban: false,
-              detik: 10
-          },
-          {
-              id: 4,
-              pertanyaan: "Apakah Ryzz nakal?",
-              jawaban: false,
-              detik: 10,
-          }
-         ]
+        // api fetching
+       const getMyApi = async () =>
+       {
+           const request = await fetch("https://puce-crow-cuff.cyclic.app/api/v1/histori");
+           const response = await request.json();
+           data = response;
+           console.log(response);
+       }
+       getMyApi();
        
-      var id = null; 
-         
-      const acak = () => {
-          if(coin < 750) {
-              document.querySelector(".button3").style.backgroundColor = "#C53030";
-
-             setTimeout(() => {
-                  document.querySelector(".button3").style.backgroundColor = "#2C7A7B";
-              }, 2000)
-          } else {
-              const nilaiAcak = Math.round(Math.random() * 4);
-          id = nilaiAcak;
-          layout.innerHTML = `<p class="jawaban">${soal[nilaiAcak].pertanyaan}</p>`;
-          coin -= 750;
-          tampil();
-          }
-      }
-         
-      const functionTrue = () => {
-          if(nyawa == 0) {
-              alert("nyawa kamu tidak cukup");
-          } else {
-              if(soal[id].jawaban == true) {
-              document.querySelector(".button1").style.backgroundColor = "#3182CE";
-              
-              coin += 1000;
-              tampil();
-              
-              setTimeout(() => {
-                  document.querySelector(".button1").style.backgroundColor = "#2C7A7B";
-              }, 2000)
-          } else {
-            document.querySelector(".button1").style.backgroundColor = "#C53030";
-            nyawa -= 1;
-            tampil();
-            
-            setTimeout(() => {
-                  document.querySelector(".button1").style.backgroundColor = "#2C7A7B";
-              }, 2000)
-          }
-          }
-      }
-      
-      const functionFalse = () => {
-          if(nyawa == 0) {
-              alert("nyawa kamu tidak cukup");
-          } else {
-              if(soal[id].jawaban == false) {
-              document.querySelector(".button2").style.backgroundColor = "#3182CE";
-              
-              coin += 1000;
-              tampil();
-              
-              setTimeout(() => {
-                  document.querySelector(".button2").style.backgroundColor = "#2C7A7B";
-              }, 2000)
-          } else {
-            document.querySelector(".button2").style.backgroundColor = "#C53030";
-            nyawa -= 1;
-            tampil();
-            
-            setTimeout(() => {
-                  document.querySelector(".button2").style.backgroundColor = "#2C7A7B";
-              }, 2000)
-          }
-          }
-      }
-      
-      tampil();
-  </script>
+       setTimeout(() => {
+           data.forEach((e) => {
+               document.write(`<div class="style"><h2>${e.histori}</h2></div>`);
+           })
+       }, 2000)
+    </script>
 </body>
 </html>
