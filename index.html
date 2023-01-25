@@ -6,6 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+        background: #1A202C;
+        box-sizing: border-box;
+    }
+</style>
 <body>
     <script type="text/javascript" charset="utf-8">
         let data = [];
@@ -21,8 +29,16 @@
        getMyApi();
        
        setTimeout(() => {
-           data.forEach((e) => {
-               document.write(`<div class="style"><h2>${e.histori}</h2></div>`);
+           document.body.background = "#1A202C";
+           data.forEach((e,i) => {
+               document.write(`<pre style="background: #1A202C; text-align: center; color: white; border-radius: 12px;">
+               <di>
+               <h2 style="color: #38B2AC;">NO <span style="color: white;">${i + 1}</span></h2>
+               <h3 style="text-transform: uppercase;">"${e?.histori}"</h3>
+               <p style="color: #fff;">ID ${e?.id}</p>
+               <p style="color: #ccc;">dibuat ${e?.createdAt}</p>
+               </div>
+               </pre>`);
            })
        }, 2000)
     </script>
