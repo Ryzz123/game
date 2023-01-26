@@ -15,34 +15,52 @@
     }
 </style>
 <body>
+    <div id="data-container"></div>
     <script type="text/javascript" charset="utf-8">
         let data = [];
       
         // api fetching
-       const getMyApi = async () =>
-       {
+       const getMyApi = async () => {
            const request = await fetch("https://puce-crow-cuff.cyclic.app/api/v1/histori");
            const response = await request.json();
            data = response;
            console.log(response);
+           updateUI();
        }
        getMyApi();
        
-       setTimeout(() => {
-           document.body.background = "#1A202C";
-           data.forEach((e,i) => {
+       const deleteMyApi = async (id) => {
+           await fetch(`https://puce-crow-cuff.cyclic.app/api/v1/histori/${id}`, {
+               method: "DELETE"
+           });
+           getMyApi();
+       }
+       
+       const updateUI = () => {
+           const container = document.getElementById("data-container");
+           container.innerHTML = "";
+           data.forEach((e, i) => {
                var date = e?.createdAt;
                var newDate = new Date(date).toLocaleString();
-               document.write(`<pre style="background: #1A202C; text-align: center; color: white; border-radius: 12px; white-space: pre-wrap;">
-               <di>
+               container.innerHTML += `
+               <pre style="background: #2D3748; text-align: center; color: white;
+                 margin: 1em auto;
+                 width: 90%;
+                 border-radius: 12px; white-space: pre-wrap;">
+               <div style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
                <h2 style="color: #38B2AC;">NO <span style="color: white;">${i + 1}</span></h2>
                <h3 style="text-transform: uppercase;">"${e?.histori}"</h3>
                <p style="color: #fff;">ID ${e?.id}</p>
                <p style="color: #ccc;">dibuat ${newDate}</p>
+               <button onclick="deleteMyApi(${e?.id})" style="padding: 8px 0; color: white;
+                 border: none;
+                 background: #38B2AC;
+                 font-size: 15px;
+                 font-wight: 500;">HAPUS</button>
                </div>
-               </pre>`);
+               </pre>`;
            })
-       }, 2000)
+       }
     </script>
 </body>
 </html>
