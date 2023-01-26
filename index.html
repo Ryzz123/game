@@ -31,12 +31,17 @@
        setTimeout(() => {
            document.body.background = "#1A202C";
            data.forEach((e,i) => {
+               var date = e?.createdAt;
+               var offset = 7;
+               var dateObject = new Date(date);
+               dateObject.setHours(dateObject.getHours() + offset);
+               var newDate = dateObject.toLocaleString();
                document.write(`<pre style="background: #1A202C; text-align: center; color: white; border-radius: 12px; white-space: pre-wrap;">
                <di>
                <h2 style="color: #38B2AC;">NO <span style="color: white;">${i + 1}</span></h2>
                <h3 style="text-transform: uppercase;">"${e?.histori}"</h3>
                <p style="color: #fff;">ID ${e?.id}</p>
-               <p style="color: #ccc;">dibuat ${e?.createdAt}</p>
+               <p style="color: #ccc;">dibuat ${newDate}</p>
                </div>
                </pre>`);
            })
