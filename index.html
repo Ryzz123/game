@@ -21,7 +21,7 @@
       
         // api fetching
        const getMyApi = async () => {
-           const request = await fetch("https://puce-crow-cuff.cyclic.app/api/v1/histori");
+           const request = await fetch("https://thankful-foal-hoodie.cyclic.app/api/v1/histori");
            const response = await request.json();
            data = response;
            console.log(response);
@@ -30,7 +30,7 @@
        getMyApi();
        
        const deleteMyApi = async (id) => {
-           await fetch(`https://puce-crow-cuff.cyclic.app/api/v1/histori/${id}`, {
+           await fetch(`https://thankful-foal-hoodie.cyclic.app/api/v1/histori/${id}`, {
                method: "DELETE"
            });
            alert(`Sukses hapus histori dengan id ${id}`);
@@ -51,8 +51,10 @@
                <div style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
                <h2 style="color: #38B2AC;">NO <span style="color: white;">${i + 1}</span></h2>
                <h3 style="text-transform: uppercase;">"${e?.histori}"</h3>
+               <h2 style="text-transform: uppercase;">RESULT</h2>
+               <h3 style="text-transform: uppercase;">"${e?.result}"</h3>
                <p style="color: #fff;">ID ${e?.id}</p>
-               <p style="color: #ccc;">dibuat ${newDate}</p>
+               <p style="color: #ccc;">dibuat oleh <span style="text-decoration: underline;">${e?.name}</span> ${newDate}</p>
                <button onclick="deleteMyApi(${e?.id})" style="padding: 8px 0; color: white;
                  border: none;
                  background: #38B2AC;
